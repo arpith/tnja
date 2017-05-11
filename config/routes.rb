@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  get 'subscriptions', to: 'subscriptions#index'
+
   get 'directory/index'
 
   root 'directory#index'

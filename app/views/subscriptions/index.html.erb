@@ -1,0 +1,21 @@
+<section id="intro" class="main special">
+  <header class="major">
+    <h2>Subscription</h2>
+  </header>
+  <form action="/purchase" method="POST">
+  <!-- Note that the amount is in paise = 50 INR -->
+  <script
+    src="https://checkout.razorpay.com/v1/checkout.js"
+    data-key="<YOUR_KEY_ID>"
+    data-amount="100000"
+    data-buttontext="Pay with Razorpay"
+    data-name="TNJA"
+    data-description="Subscription Fee"
+    data-image="https://your-awesome-site.com/your_logo.jpg"
+    data-prefill.name="Harshil Mathur"
+    data-prefill.email="support@razorpay.com"
+    data-theme.color="#F37254"
+  ></script>
+  <input type="hidden" value="Hidden Element" name="hidden">
+  </form>
+</section>
