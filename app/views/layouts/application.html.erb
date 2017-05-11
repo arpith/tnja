@@ -5,10 +5,46 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	<link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+	<link rel="manifest" href="/assets/manifest.json">
+	<link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#7d50c7">
+	<link rel="shortcut icon" href="/assets/favicon.ico">
+	<meta name="msapplication-config" content="/assets/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+	<meta name="viewport" content="width=device-width">
   </head>
 
   <body>
-    <%= yield %>
+	<div id="wrapper">
+	  <header id="header" class="alt">
+		<h1>Tamil Nadu Judicial Association</h1>
+		<p class="notice"><%= notice %></p>
+      	<p class="alert"><%= alert %></p>
+	  </header>
+	  <div id="main">
+	  <%= yield %>
+	  </div>
+	  <footer id="footer">
+		<section>
+		  <h2>About Tamil Nadu Judicial Association</h2>
+		  <p>Sed lorem ipsum dolor sit amet et nullam consequat feugiat consequat magna adipiscing tempus etiam dolore veroeros. eget dapibus mauris. Cras aliquet, nisl ut viverra sollicitudin, ligula erat egestas velit, vitae tincidunt odio.</p>
+		</section>
+		<section>
+		  <h2>Contact Information</h2>
+		  <dl class="alt">
+		  <dt>Address</dt>
+	      <dd>1234 Somewhere Road &bull; Chennai, TN 00000 &bull; India</dd>
+	      <dt>Phone</dt>
+	      <dd>+91 00000 00000</dd>
+		  <dt>Email</dt>
+		  <dd><a href="#">contact@email.com</a></dd>
+		  </dl>
+		</section>
+	  </footer>
+    </div>
   </body>
 </html>

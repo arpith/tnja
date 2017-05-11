@@ -1,3 +1,14 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  namespace :admin do
+    resources :users
+    root to: "users#index"
+    resources :positions
+    root to: "positions#index"
+  end
+
+  devise_for :users
+
+  get 'directory/index'
+
+  root 'directory#index'
 end
