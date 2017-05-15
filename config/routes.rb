@@ -13,5 +13,6 @@ Rails.application.routes.draw do
 
     root to: 'directory#index', as: :authenticated_root
   end
+  get 'discourse/sso', to: 'discourse_sso#sso'
   root to: redirect('/users/sign_in')
 end
