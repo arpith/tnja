@@ -14,4 +14,3 @@ test:
 production:
   <<: *default
   url: <%= ENV['DB_URL'] %>
-  proxy_host: <%= ENV['FIXIE_SOCKS_HOST'] %>
