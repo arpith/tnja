@@ -1,6 +1,9 @@
 require "administrate/base_dashboard"
 
 class CategoryDashboard < Administrate::BaseDashboard
+  def display_resource(category)
+    category.name
+  end
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
