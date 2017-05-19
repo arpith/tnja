@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class PositionDashboard < Administrate::BaseDashboard
+class CategoryDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -10,7 +10,7 @@ class PositionDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     users: Field::HasMany,
     id: Field::Number,
-    title: Field::String,
+    name: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -23,7 +23,7 @@ class PositionDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :users,
     :id,
-    :title,
+    :name,
     :created_at,
   ].freeze
 
@@ -32,7 +32,7 @@ class PositionDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :users,
     :id,
-    :title,
+    :name,
     :created_at,
     :updated_at,
   ].freeze
@@ -42,13 +42,13 @@ class PositionDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :users,
-    :title,
+    :name,
   ].freeze
 
-  # Overwrite this method to customize how positions are displayed
+  # Overwrite this method to customize how categories are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(position)
-  #   "Position ##{position.id}"
+  # def display_resource(category)
+  #   "Category ##{category.id}"
   # end
 end

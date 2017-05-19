@@ -10901,3 +10901,1695 @@ Migrating to AddFullnameToUsers (20170517051035)
   [1m[35m (298.9ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (300.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(7951837983298384245)[0m
   [1m[36mActiveRecord::SchemaMigration Load (299.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (339.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7951837983298384245);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (302.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to RemoveUserFromPositions (20170519074222)
+  [1m[35m (300.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (412.0ms)[0m  [1m[35mALTER TABLE "positions" DROP CONSTRAINT "fk_rails_4e4581e38b"[0m
+  [1m[35m (305.1ms)[0m  [1m[35mALTER TABLE "positions" DROP "user_id"[0m
+  [1m[35mSQL (304.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170519074222"]]
+  [1m[35m (303.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (325.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (400.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (307.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (409.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7951837983298384245)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (373.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (3870.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7951837983298384245);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (4414.9ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddPositionToUser (20170519074656)
+  [1m[35m (4800.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3972.2ms)[0m  [1m[35mALTER TABLE "users" ADD "position_id" integer[0m
+  [1m[35m (4298.8ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_position_id" ON "users"  ("position_id")[0m
+  [1m[35m (4606.7ms)[0m  [1m[35mALTER TABLE "users" ADD CONSTRAINT "fk_rails_2d26d9377b"
+FOREIGN KEY ("position_id")
+  REFERENCES "positions" ("id")
+[0m
+  [1m[35mSQL (3685.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170519074656"]]
+  [1m[35m (2763.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCategories (20170519080023)
+  [1m[35m (2765.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3173.3ms)[0m  [1m[35mCREATE TABLE "categories" ("id" serial primary key, "name" character varying, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_b8e2f7adfc"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (5124.0ms)[0m  [1m[35mCREATE  INDEX  "index_categories_on_user_id" ON "categories"  ("user_id")[0m
+  [1m[35mSQL (2582.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170519080023"]]
+  [1m[35m (2836.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RemoveUserFromCategories (20170519080306)
+  [1m[35m (3480.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4299.4ms)[0m  [1m[35mALTER TABLE "categories" DROP CONSTRAINT "fk_rails_b8e2f7adfc"[0m
+  [1m[35m (4918.6ms)[0m  [1m[35mALTER TABLE "categories" DROP "user_id"[0m
+  [1m[35mSQL (3988.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170519080306"]]
+  [1m[35m (3024.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddCategoryToUser (20170519080349)
+  [1m[35m (1481.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (612.4ms)[0m  [1m[35mALTER TABLE "users" ADD "category_id" integer[0m
+  [1m[35m (1843.9ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_category_id" ON "users"  ("category_id")[0m
+  [1m[35m (2659.8ms)[0m  [1m[35mALTER TABLE "users" ADD CONSTRAINT "fk_rails_829251d812"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+[0m
+  [1m[35mSQL (3787.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170519080349"]]
+  [1m[35m (5284.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3584.9ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (815.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1022.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1330.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(7951837983298384245)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1843.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (1425.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7951837983298384245);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1722.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddRankToUser (20170519103412)
+  [1m[35m (1511.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1752.9ms)[0m  [1m[35mALTER TABLE "users" ADD "rank" integer[0m
+  [1m[35mSQL (1826.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170519103412"]]
+  [1m[35m (1842.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1805.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (2157.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3021.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (3282.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(7951837983298384245)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1617.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Started GET "/" for ::1 at 2017-05-19 16:06:52 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (637.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mUser Load (615.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DirectoryController#index as HTML
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (uninitialized constant DirectoryController::Categories):
+  
+app/controllers/directory_controller.rb:3:in `index'
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (4.8ms)
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (121.8ms)
+Started GET "/" for ::1 at 2017-05-19 16:09:49 +0530
+  [1m[36mUser Load (3376.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DirectoryController#index as HTML
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (uninitialized constant DirectoryController::Categories):
+  
+app/controllers/directory_controller.rb:3:in `index'
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (4.0ms)
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.9ms)
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (81.4ms)
+Started GET "/" for ::1 at 2017-05-19 16:11:57 +0530
+  [1m[36mUser Load (520.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DirectoryController#index as HTML
+  Rendering directory/index.html.erb within layouts/application
+  [1m[36mCategory Load (1261.8ms)[0m  [1m[34mSELECT "rank", "full_name" FROM "categories" INNER JOIN "users" ON "users"."category_id" = "categories"."id" ORDER BY "categories"."rank" ASC[0m
+  Rendered directory/index.html.erb within layouts/application (3234.8ms)
+Completed 500 Internal Server Error in 3259ms (ActiveRecord: 3209.8ms)
+
+
+  
+ActionView::Template::Error (PG::WrongObjectType: ERROR:  WITHIN GROUP is required for ordered-set aggregate rank
+LINE 1: ...users"."category_id" = "categories"."id" ORDER BY "categorie...
+                                                             ^
+: SELECT "rank", "full_name" FROM "categories" INNER JOIN "users" ON "users"."category_id" = "categories"."id" ORDER BY "categories"."rank" ASC):
+    3:     <h2>Directory</h2>
+    4:   </header>
+    5: </section>
+    6: <% @categories.each do |category, users| %>
+    7:   <section class="main special">
+    8:     <header class="major">
+    9: 	  <h2><%= category %></h2>
+  
+app/views/directory/index.html.erb:6:in `_app_views_directory_index_html_erb__2106368547325629410_70156886967280'
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (5.1ms)
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.3ms)
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (83.6ms)
+Started GET "/" for ::1 at 2017-05-19 16:16:33 +0530
+  [1m[36mUser Load (1527.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DirectoryController#index as HTML
+  Rendering directory/index.html.erb within layouts/application
+  [1m[36mCategory Load (2469.8ms)[0m  [1m[34mSELECT "rank", "full_name" FROM "categories" INNER JOIN "users" ON "users"."category_id" = "categories"."id" GROUP BY "category" ORDER BY "categories"."rank" ASC[0m
+  Rendered directory/index.html.erb within layouts/application (6001.3ms)
+Completed 500 Internal Server Error in 6017ms (ActiveRecord: 5991.6ms)
+
+
+  
+ActionView::Template::Error (PG::WrongObjectType: ERROR:  WITHIN GROUP is required for ordered-set aggregate rank
+LINE 1: ... = "categories"."id" GROUP BY "category" ORDER BY "categorie...
+                                                             ^
+: SELECT "rank", "full_name" FROM "categories" INNER JOIN "users" ON "users"."category_id" = "categories"."id" GROUP BY "category" ORDER BY "categories"."rank" ASC):
+    3:     <h2>Directory</h2>
+    4:   </header>
+    5: </section>
+    6: <% @categories.each do |category, users| %>
+    7:   <section class="main special">
+    8:     <header class="major">
+    9: 	  <h2><%= category %></h2>
+  
+app/views/directory/index.html.erb:6:in `_app_views_directory_index_html_erb__2106368547325629410_70156887841820'
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (6.9ms)
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.3ms)
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (95.1ms)
+Started GET "/" for ::1 at 2017-05-19 16:18:01 +0530
+  [1m[36mUser Load (1636.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DirectoryController#index as HTML
+  Rendering directory/index.html.erb within layouts/application
+  [1m[36mCategory Load (2154.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" INNER JOIN "users" ON "users"."category_id" = "categories"."id" ORDER BY "categories"."rank" ASC[0m
+  Rendered directory/index.html.erb within layouts/application (4269.5ms)
+Completed 500 Internal Server Error in 4285ms (ActiveRecord: 4262.7ms)
+
+
+  
+ActionView::Template::Error (PG::WrongObjectType: ERROR:  WITHIN GROUP is required for ordered-set aggregate rank
+LINE 1: ...users"."category_id" = "categories"."id" ORDER BY "categorie...
+                                                             ^
+: SELECT "categories".* FROM "categories" INNER JOIN "users" ON "users"."category_id" = "categories"."id" ORDER BY "categories"."rank" ASC):
+    3:     <h2>Directory</h2>
+    4:   </header>
+    5: </section>
+    6: <% @categories.each do |category, users| %>
+    7:   <section class="main special">
+    8:     <header class="major">
+    9: 	  <h2><%= category %></h2>
+  
+app/views/directory/index.html.erb:6:in `_app_views_directory_index_html_erb__2106368547325629410_70156894325700'
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (6.1ms)
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.6ms)
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (89.9ms)
+Started GET "/" for ::1 at 2017-05-19 16:20:10 +0530
+  [1m[36mUser Load (1835.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DirectoryController#index as HTML
+  Rendering directory/index.html.erb within layouts/application
+  [1m[36mCategory Load (3789.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" INNER JOIN "users" ON "users"."category_id" = "categories"."id"[0m
+  Rendered directory/index.html.erb within layouts/application (11834.5ms)
+Completed 200 OK in 12392ms (Views: 556.3ms | ActiveRecord: 11829.8ms)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/font-awesome.min.css"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  
+ActionController::RoutingError (No route matches [GET] "/assets/images/overlay.png"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for ::1 at 2017-05-19 16:21:30 +0530
+  [1m[36mUser Load (2788.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DirectoryController#index as HTML
+  Rendering directory/index.html.erb within layouts/application
+  [1m[36mCategory Load (1552.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" INNER JOIN "users" ON "users"."category_id" = "categories"."id"[0m
+  Rendered directory/index.html.erb within layouts/application (4747.8ms)
+Completed 200 OK in 4797ms (Views: 48.8ms | ActiveRecord: 4741.7ms)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/font-awesome.min.css"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  
+ActionController::RoutingError (No route matches [GET] "/assets/images/overlay.png"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  
+ActionController::RoutingError (No route matches [GET] "/assets/font-awesome.min.css"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for ::1 at 2017-05-19 16:32:38 +0530
+  [1m[36mUser Load (448.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DirectoryController#index as HTML
+  [1m[36mCategory Load (531.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendering directory/index.html.erb within layouts/application
+  Rendered directory/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 918ms (Views: 59.9ms | ActiveRecord: 848.0ms)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/font-awesome.min.css"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  
+ActionController::RoutingError (No route matches [GET] "/assets/images/overlay.png"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for ::1 at 2017-05-19 16:33:39 +0530
+  [1m[36mUser Load (810.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DirectoryController#index as HTML
+  [1m[36mCategory Load (682.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendering directory/index.html.erb within layouts/application
+  Rendered directory/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 727ms (Views: 38.5ms | ActiveRecord: 682.2ms)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/font-awesome.min.css"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  
+ActionController::RoutingError (No route matches [GET] "/assets/images/overlay.png"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for ::1 at 2017-05-19 16:36:21 +0530
+  [1m[36mUser Load (519.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DirectoryController#index as HTML
+  [1m[36mCategory Load (368.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendering directory/index.html.erb within layouts/application
+  Rendered directory/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 438ms (Views: 60.6ms | ActiveRecord: 368.1ms)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/font-awesome.min.css"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  
+ActionController::RoutingError (No route matches [GET] "/assets/images/overlay.png"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for ::1 at 2017-05-19 16:36:52 +0530
+  [1m[36mUser Load (511.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DirectoryController#index as HTML
+  [1m[36mCategory Load (473.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendering directory/index.html.erb within layouts/application
+  Rendered directory/index.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 522ms (Views: 42.3ms | ActiveRecord: 473.0ms)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/font-awesome.min.css"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  
+ActionController::RoutingError (No route matches [GET] "/assets/images/overlay.png"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for ::1 at 2017-05-19 16:38:33 +0530
+  [1m[36mUser Load (499.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DirectoryController#index as HTML
+  [1m[36mCategory Load (484.8ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendering directory/index.html.erb within layouts/application
+  Rendered directory/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 534ms (Views: 42.4ms | ActiveRecord: 484.8ms)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/font-awesome.min.css"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  
+ActionController::RoutingError (No route matches [GET] "/assets/images/overlay.png"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.0.2) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.2) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/admin" for ::1 at 2017-05-19 16:39:11 +0530
+Started GET "/admin" for ::1 at 2017-05-19 16:39:11 +0530
+  [1m[36mUser Load (483.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (398.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#index as HTML
+Processing by Admin::UsersController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (14.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (12.8ms)
+  [1m[36mUser Load (390.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  [1m[36mUser Load (399.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_one/_index.html.erb (1.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (1.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered admin/application/_collection.html.erb (1272.1ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (1443.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_one/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered admin/application/_collection.html.erb (1355.6ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (1518.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (80.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (36.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (316.6ms)
+Completed 200 OK in 2087ms (Views: 746.9ms | ActiveRecord: 1297.6ms)
+
+
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (324.5ms)
+Completed 200 OK in 2111ms (Views: 874.4ms | ActiveRecord: 1206.4ms)
+
+
+Started GET "/admin/users/new" for ::1 at 2017-05-19 16:40:13 +0530
+  [1m[36mUser Load (463.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#new as HTML
+  Rendering admin/application/new.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_one/_form.html.erb (8.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (1.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (0.8ms)
+  Rendered admin/application/_form.html.erb (34.7ms)
+  Rendered admin/application/new.html.erb within layouts/administrate/application (47.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (19.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (1.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (30.5ms)
+Completed 200 OK in 215ms (Views: 213.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admin/users" for ::1 at 2017-05-19 16:40:54 +0530
+  [1m[36mUser Load (397.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (5.7ms)
+  [1m[36mUser Load (400.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (1.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.6ms)
+  Rendered admin/application/_collection.html.erb (1784.0ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (1830.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (20.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (2.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (1.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (34.0ms)
+Completed 200 OK in 1999ms (Views: 258.8ms | ActiveRecord: 1736.9ms)
+
+
+Started GET "/admin/users/new" for ::1 at 2017-05-19 16:41:01 +0530
+  [1m[36mUser Load (515.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#new as HTML
+  Rendering admin/application/new.html.erb within layouts/administrate/application
+  [1m[36mPosition Load (343.9ms)[0m  [1m[34mSELECT "positions".* FROM "positions"[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_form.html.erb (349.7ms)
+  [1m[36mCategory Load (503.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_form.html.erb (505.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (1.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (0.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_form.html.erb (1.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_form.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_form.html.erb (1.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_form.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_form.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (1.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_form.html.erb (0.7ms)
+  Rendered admin/application/_form.html.erb (938.3ms)
+  Rendered admin/application/new.html.erb within layouts/administrate/application (950.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (21.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (2.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (1.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (36.4ms)
+Completed 200 OK in 1123ms (Views: 274.4ms | ActiveRecord: 847.6ms)
+
+
+Started GET "/admin/positions" for ::1 at 2017-05-19 16:41:16 +0530
+  [1m[36mUser Load (491.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::PositionsController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (4.6ms)
+  [1m[36mPosition Load (2172.1ms)[0m  [1m[34mSELECT  "positions".* FROM "positions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  Rendered admin/application/_collection.html.erb (2180.3ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (2225.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (16.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (2.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (28.5ms)
+Completed 200 OK in 2382ms (Views: 207.7ms | ActiveRecord: 2172.1ms)
+
+
+Started GET "/admin/positions" for ::1 at 2017-05-19 16:41:24 +0530
+  [1m[36mUser Load (516.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::PositionsController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (5.4ms)
+  [1m[36mPosition Load (403.9ms)[0m  [1m[34mSELECT  "positions".* FROM "positions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  Rendered admin/application/_collection.html.erb (413.1ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (459.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (19.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (1.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (28.0ms)
+Completed 200 OK in 626ms (Views: 215.4ms | ActiveRecord: 403.9ms)
+
+
+Started GET "/admin/positions/new" for ::1 at 2017-05-19 16:41:31 +0530
+  [1m[36mUser Load (409.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::PositionsController#new as HTML
+  Rendering admin/application/new.html.erb within layouts/administrate/application
+  [1m[36mUser Load (440.9ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_form.html.erb (445.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (1.2ms)
+  Rendered admin/application/_form.html.erb (478.8ms)
+  Rendered admin/application/new.html.erb within layouts/administrate/application (489.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (17.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (2.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (1.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (29.1ms)
+Completed 200 OK in 1468ms (Views: 207.2ms | ActiveRecord: 1256.2ms)
+
+
+Started POST "/admin/positions" for ::1 at 2017-05-19 16:41:48 +0530
+  [1m[36mUser Load (505.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::PositionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YXNdCg85c5BHFZ5WVp6aFIpoyTiTAuiFVpA4k9FNWwCHbA3nb/zielwVsR/OR4oHwQu0Aw0CByFlBL1t3vk1Kw==", "position"=>{"user_ids"=>[""], "title"=>"President"}, "commit"=>"Create Position"}
+  [1m[36mUser Load (510.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=0[0m
+  [1m[35m (510.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (407.6ms)[0m  [1m[32mINSERT INTO "positions" ("title", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "President"], ["created_at", 2017-05-19 11:11:50 UTC], ["updated_at", 2017-05-19 11:11:50 UTC]]
+  [1m[35m (404.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/admin/positions/1
+Completed 302 Found in 1841ms (ActiveRecord: 1832.8ms)
+
+
+Started GET "/admin/positions/1" for ::1 at 2017-05-19 16:41:51 +0530
+  [1m[36mUser Load (408.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::PositionsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPosition Load (408.0ms)[0m  [1m[34mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/application/show.html.erb within layouts/administrate/application
+  [1m[35m (464.5ms)[0m  [1m[34mSELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "users" WHERE "users"."position_id" = $1 LIMIT $2 OFFSET $3) subquery_for_count[0m  [["position_id", 1], ["LIMIT", 5], ["OFFSET", 0]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_show.html.erb (472.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_show.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_show.html.erb (1.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_show.html.erb (1.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_show.html.erb (0.3ms)
+  Rendered admin/application/show.html.erb within layouts/administrate/application (515.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (18.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (2.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (1.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (31.8ms)
+Completed 200 OK in 2024ms (Views: 230.0ms | ActiveRecord: 1381.2ms)
+
+
+Started GET "/admin/positions" for ::1 at 2017-05-19 16:42:01 +0530
+  [1m[36mUser Load (513.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::PositionsController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (5.0ms)
+  [1m[36mPosition Load (431.3ms)[0m  [1m[34mSELECT  "positions".* FROM "positions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  [1m[36mUser Load (425.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."position_id" = 1[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (3.1ms)
+  Rendered admin/application/_collection.html.erb (906.7ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (951.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (18.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (2.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (1.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (32.3ms)
+Completed 200 OK in 1117ms (Views: 258.8ms | ActiveRecord: 857.0ms)
+
+
+Started GET "/admin/positions/new" for ::1 at 2017-05-19 16:42:10 +0530
+  [1m[36mUser Load (716.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::PositionsController#new as HTML
+  Rendering admin/application/new.html.erb within layouts/administrate/application
+  [1m[36mUser Load (662.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_form.html.erb (665.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (1.4ms)
+  Rendered admin/application/_form.html.erb (680.6ms)
+  Rendered admin/application/new.html.erb within layouts/administrate/application (692.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (19.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (1.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (30.6ms)
+Completed 200 OK in 855ms (Views: 192.4ms | ActiveRecord: 662.0ms)
+
+
+Started POST "/admin/positions" for ::1 at 2017-05-19 16:42:32 +0530
+  [1m[36mUser Load (511.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::PositionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4K0r3H1XPXuOp+P0rnCWR6C2z+3y8qSSGCEhWg5S/BwGsnsxHZKskZWnzL02qYZU69Wy1mzySzYrtaSkAeaSNw==", "position"=>{"user_ids"=>[""], "title"=>"Secretary"}, "commit"=>"Create Position"}
+  [1m[36mUser Load (508.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=0[0m
+  [1m[35m (509.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (413.2ms)[0m  [1m[32mINSERT INTO "positions" ("title", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Secretary"], ["created_at", 2017-05-19 11:12:34 UTC], ["updated_at", 2017-05-19 11:12:34 UTC]]
+  [1m[35m (403.3ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/admin/positions/2
+Completed 302 Found in 1840ms (ActiveRecord: 1833.9ms)
+
+
+Started GET "/admin/positions/2" for ::1 at 2017-05-19 16:42:34 +0530
+  [1m[36mUser Load (510.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::PositionsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPosition Load (404.3ms)[0m  [1m[34mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering admin/application/show.html.erb within layouts/administrate/application
+  [1m[35m (477.4ms)[0m  [1m[34mSELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "users" WHERE "users"."position_id" = $1 LIMIT $2 OFFSET $3) subquery_for_count[0m  [["position_id", 2], ["LIMIT", 5], ["OFFSET", 0]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_show.html.erb (480.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_show.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_show.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_show.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_show.html.erb (0.3ms)
+  Rendered admin/application/show.html.erb within layouts/administrate/application (512.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (18.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (2.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (33.5ms)
+Completed 200 OK in 2101ms (Views: 197.2ms | ActiveRecord: 1390.2ms)
+
+
+Started GET "/admin/users" for ::1 at 2017-05-19 16:42:42 +0530
+  [1m[36mUser Load (416.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (5.3ms)
+  [1m[36mUser Load (422.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.6ms)
+  Rendered admin/application/_collection.html.erb (1849.9ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (1894.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (19.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (2.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (1.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (27.9ms)
+Completed 200 OK in 2053ms (Views: 241.5ms | ActiveRecord: 1810.5ms)
+
+
+Started GET "/admin/users" for ::1 at 2017-05-19 16:44:03 +0530
+  [1m[36mUser Load (505.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (5.5ms)
+  [1m[36mUser Load (376.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (1.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.6ms)
+  Rendered admin/application/_collection.html.erb (417.1ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (461.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (19.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (4.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (1.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (32.8ms)
+Completed 200 OK in 630ms (Views: 250.6ms | ActiveRecord: 376.7ms)
+
+
+Started GET "/admin/categories" for ::1 at 2017-05-19 16:44:09 +0530
+  [1m[36mUser Load (499.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::CategoriesController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (5.3ms)
+  [1m[36mCategory Load (431.2ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  Rendered admin/application/_collection.html.erb (439.9ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (485.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (20.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (4.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (31.0ms)
+Completed 200 OK in 655ms (Views: 220.9ms | ActiveRecord: 431.2ms)
+
+
+Started GET "/admin/categories/new" for ::1 at 2017-05-19 16:44:13 +0530
+  [1m[36mUser Load (462.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::CategoriesController#new as HTML
+  Rendering admin/application/new.html.erb within layouts/administrate/application
+  [1m[36mUser Load (457.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_form.html.erb (460.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (1.3ms)
+  Rendered admin/application/_form.html.erb (476.9ms)
+  Rendered admin/application/new.html.erb within layouts/administrate/application (488.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (17.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (29.5ms)
+Completed 200 OK in 1103ms (Views: 188.5ms | ActiveRecord: 909.4ms)
+
+
+Started POST "/admin/categories" for ::1 at 2017-05-19 16:44:22 +0530
+  [1m[36mUser Load (419.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::CategoriesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"X4M9w3snXqpmjj3ZO/WKKzAjpBnRwyGRdpywStbjNqi5nG0uG+LPQH2OEpCjLJo4e0DZIk/DzjVFCDW02VdYgw==", "category"=>{"user_ids"=>[""], "name"=>"District Judges"}, "commit"=>"Create Category"}
+  [1m[36mUser Load (399.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=0[0m
+  [1m[35m (404.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (508.8ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "District Judges"], ["created_at", 2017-05-19 11:14:24 UTC], ["updated_at", 2017-05-19 11:14:24 UTC]]
+  [1m[35m (512.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/admin/categories/1
+Completed 302 Found in 1833ms (ActiveRecord: 1825.7ms)
+
+
+Started GET "/admin/categories/1" for ::1 at 2017-05-19 16:44:25 +0530
+  [1m[36mUser Load (439.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::CategoriesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCategory Load (407.1ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/application/show.html.erb within layouts/administrate/application
+  [1m[35m (471.9ms)[0m  [1m[34mSELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "users" WHERE "users"."category_id" = $1 LIMIT $2 OFFSET $3) subquery_for_count[0m  [["category_id", 1], ["LIMIT", 5], ["OFFSET", 0]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_show.html.erb (477.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_show.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_show.html.erb (0.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_show.html.erb (1.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_show.html.erb (0.4ms)
+  Rendered admin/application/show.html.erb within layouts/administrate/application (509.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (18.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (1.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (30.1ms)
+Completed 200 OK in 1980ms (Views: 210.9ms | ActiveRecord: 1355.0ms)
+
+
+Started GET "/admin/categories" for ::1 at 2017-05-19 16:44:30 +0530
+  [1m[36mUser Load (409.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::CategoriesController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (4.5ms)
+  [1m[36mCategory Load (433.3ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  [1m[36mUser Load (410.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."category_id" = 1[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.8ms)
+  Rendered admin/application/_collection.html.erb (881.5ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (925.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (17.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (31.9ms)
+Completed 200 OK in 1088ms (Views: 243.7ms | ActiveRecord: 843.3ms)
+
+
+Started GET "/admin/categories/new" for ::1 at 2017-05-19 16:44:34 +0530
+  [1m[36mUser Load (509.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::CategoriesController#new as HTML
+  Rendering admin/application/new.html.erb within layouts/administrate/application
+  [1m[36mUser Load (360.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_form.html.erb (364.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (1.2ms)
+  Rendered admin/application/_form.html.erb (378.3ms)
+  Rendered admin/application/new.html.erb within layouts/administrate/application (389.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (19.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (4.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (29.0ms)
+Completed 200 OK in 552ms (Views: 190.8ms | ActiveRecord: 360.8ms)
+
+
+Started POST "/admin/categories" for ::1 at 2017-05-19 16:44:45 +0530
+  [1m[36mUser Load (512.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::CategoriesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wSFYoZIQaOx8bzZd1W2805C4/aWAVy4P76d0Hy2wOKYnPghM8tX5BmdvGRRNtKzA29uAnh5XwavcM/HhIgRWjQ==", "category"=>{"user_ids"=>[""], "name"=>"Civil Judges Senior Division"}, "commit"=>"Create Category"}
+  [1m[36mUser Load (403.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=0[0m
+  [1m[35m (405.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (511.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Civil Judges Senior Division"], ["created_at", 2017-05-19 11:14:47 UTC], ["updated_at", 2017-05-19 11:14:47 UTC]]
+  [1m[35m (412.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/admin/categories/2
+Completed 302 Found in 1738ms (ActiveRecord: 1731.4ms)
+
+
+Started GET "/admin/categories/2" for ::1 at 2017-05-19 16:44:48 +0530
+  [1m[36mUser Load (502.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::CategoriesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mCategory Load (510.0ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering admin/application/show.html.erb within layouts/administrate/application
+  [1m[35m (472.8ms)[0m  [1m[34mSELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "users" WHERE "users"."category_id" = $1 LIMIT $2 OFFSET $3) subquery_for_count[0m  [["category_id", 2], ["LIMIT", 5], ["OFFSET", 0]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_show.html.erb (475.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_show.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_show.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_show.html.erb (1.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_show.html.erb (0.2ms)
+  Rendered admin/application/show.html.erb within layouts/administrate/application (507.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (18.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (29.4ms)
+Completed 200 OK in 1586ms (Views: 192.3ms | ActiveRecord: 982.7ms)
+
+
+Started GET "/admin/categories" for ::1 at 2017-05-19 16:44:53 +0530
+  [1m[36mUser Load (424.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::CategoriesController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (5.0ms)
+  [1m[36mCategory Load (397.8ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  [1m[36mUser Load (431.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."category_id" IN (1, 2)[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.2ms)
+  Rendered admin/application/_collection.html.erb (890.7ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (935.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (19.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (30.8ms)
+Completed 200 OK in 1097ms (Views: 266.3ms | ActiveRecord: 829.4ms)
+
+
+Started GET "/admin/categories/new" for ::1 at 2017-05-19 16:44:57 +0530
+  [1m[36mUser Load (405.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::CategoriesController#new as HTML
+  Rendering admin/application/new.html.erb within layouts/administrate/application
+  [1m[36mUser Load (567.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_form.html.erb (570.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (1.1ms)
+  Rendered admin/application/_form.html.erb (584.6ms)
+  Rendered admin/application/new.html.erb within layouts/administrate/application (596.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (17.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (27.1ms)
+Completed 200 OK in 749ms (Views: 181.5ms | ActiveRecord: 567.0ms)
+
+
+Started POST "/admin/categories" for ::1 at 2017-05-19 16:45:04 +0530
+  [1m[36mUser Load (384.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::CategoriesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"AZhU09R/Qjx2N1B9sV96ATMQTINuZpwSxiucrGW2cRLnhwQ+tLrT1m03fzQphmoSeHMxuPBmc7b1vxlSagIfOQ==", "category"=>{"user_ids"=>[""], "name"=>"Civil Judges"}, "commit"=>"Create Category"}
+  [1m[36mUser Load (432.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=0[0m
+  [1m[35m (406.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (407.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Civil Judges"], ["created_at", 2017-05-19 11:15:06 UTC], ["updated_at", 2017-05-19 11:15:06 UTC]]
+  [1m[35m (514.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/admin/categories/3
+Completed 302 Found in 1767ms (ActiveRecord: 1760.8ms)
+
+
+Started GET "/admin/categories/3" for ::1 at 2017-05-19 16:45:07 +0530
+  [1m[36mUser Load (601.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::CategoriesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mCategory Load (557.0ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering admin/application/show.html.erb within layouts/administrate/application
+  [1m[35m (422.2ms)[0m  [1m[34mSELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "users" WHERE "users"."category_id" = $1 LIMIT $2 OFFSET $3) subquery_for_count[0m  [["category_id", 3], ["LIMIT", 5], ["OFFSET", 0]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_show.html.erb (425.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_show.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_show.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_show.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_show.html.erb (0.3ms)
+  Rendered admin/application/show.html.erb within layouts/administrate/application (455.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (16.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (19.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (30.3ms)
+Completed 200 OK in 1597ms (Views: 207.0ms | ActiveRecord: 979.3ms)
+
+
+Started GET "/admin/users" for ::1 at 2017-05-19 16:45:12 +0530
+  [1m[36mUser Load (509.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (5.4ms)
+  [1m[36mUser Load (436.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.9ms)
+  Rendered admin/application/_collection.html.erb (470.3ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (513.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (19.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (1.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (28.9ms)
+Completed 200 OK in 678ms (Views: 240.0ms | ActiveRecord: 436.9ms)
+
+
+Started GET "/admin/users/new" for ::1 at 2017-05-19 16:46:40 +0530
+  [1m[36mUser Load (500.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#new as HTML
+  Rendering admin/application/new.html.erb within layouts/administrate/application
+  [1m[36mPosition Load (422.3ms)[0m  [1m[34mSELECT "positions".* FROM "positions"[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_form.html.erb (431.5ms)
+  [1m[36mCategory Load (499.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_form.html.erb (506.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (1.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (0.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_form.html.erb (1.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_form.html.erb (0.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_form.html.erb (1.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_form.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_form.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_form.html.erb (0.7ms)
+  Rendered admin/application/_form.html.erb (1021.5ms)
+  Rendered admin/application/new.html.erb within layouts/administrate/application (1032.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (20.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (29.3ms)
+Completed 200 OK in 1196ms (Views: 272.6ms | ActiveRecord: 921.4ms)
+
+
+Started GET "/admin/users" for ::1 at 2017-05-19 16:50:18 +0530
+  [1m[36mUser Load (505.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (4.8ms)
+  [1m[36mUser Load (423.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.0ms)
+  Rendered admin/application/_collection.html.erb (468.2ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (506.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (15.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (23.2ms)
+Completed 200 OK in 642ms (Views: 215.9ms | ActiveRecord: 423.4ms)
+
+
+Started GET "/admin/positions" for ::1 at 2017-05-19 16:50:27 +0530
+  [1m[36mUser Load (407.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::PositionsController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (4.1ms)
+  [1m[36mPosition Load (431.1ms)[0m  [1m[34mSELECT  "positions".* FROM "positions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  [1m[36mUser Load (480.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."position_id" IN (1, 2)[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (1.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.2ms)
+  Rendered admin/application/_collection.html.erb (1309.5ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (1352.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (17.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (28.6ms)
+Completed 200 OK in 1505ms (Views: 261.3ms | ActiveRecord: 1241.4ms)
+
+
+Started GET "/admin/categories" for ::1 at 2017-05-19 16:50:30 +0530
+  [1m[36mUser Load (409.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::CategoriesController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (4.6ms)
+  [1m[36mCategory Load (1974.5ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  [1m[36mUser Load (393.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."category_id" IN (1, 2, 3)[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.2ms)
+  Rendered admin/application/_collection.html.erb (2465.2ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (2509.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (20.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (32.5ms)
+Completed 200 OK in 2677ms (Views: 306.1ms | ActiveRecord: 2368.1ms)
+
+
+Started GET "/admin/users" for ::1 at 2017-05-19 16:50:36 +0530
+  [1m[36mUser Load (406.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (4.4ms)
+  [1m[36mUser Load (435.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered admin/application/_collection.html.erb (479.8ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (524.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (20.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (27.7ms)
+Completed 200 OK in 688ms (Views: 251.8ms | ActiveRecord: 435.2ms)
+
+
+Started GET "/admin/users" for ::1 at 2017-05-19 16:51:22 +0530
+  [1m[36mUser Load (603.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (6.1ms)
+  [1m[36mUser Load (337.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered admin/application/_collection.html.erb (390.0ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (436.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (18.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (4.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (29.4ms)
+Completed 200 OK in 598ms (Views: 257.9ms | ActiveRecord: 337.6ms)
+
+
+Started GET "/admin/positions" for ::1 at 2017-05-19 16:51:44 +0530
+  [1m[36mUser Load (403.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::PositionsController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (4.6ms)
+  [1m[36mPosition Load (382.9ms)[0m  [1m[34mSELECT  "positions".* FROM "positions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  [1m[36mUser Load (382.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."position_id" IN (1, 2)[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.3ms)
+  Rendered admin/application/_collection.html.erb (837.0ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (879.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (16.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (1.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (28.8ms)
+Completed 200 OK in 1036ms (Views: 268.3ms | ActiveRecord: 764.9ms)
+
+
+Started GET "/admin/categories" for ::1 at 2017-05-19 16:51:47 +0530
+  [1m[36mUser Load (607.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::CategoriesController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (5.0ms)
+  [1m[36mCategory Load (531.6ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  [1m[36mUser Load (504.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."category_id" IN (1, 2, 3)[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (1.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (1.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.2ms)
+  Rendered admin/application/_collection.html.erb (1133.4ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (1178.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (19.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (30.9ms)
+Completed 200 OK in 1348ms (Views: 309.4ms | ActiveRecord: 1036.4ms)
+
+
+Started GET "/admin/users" for ::1 at 2017-05-19 16:51:54 +0530
+  [1m[36mUser Load (417.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (4.3ms)
+  [1m[36mUser Load (366.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (1.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered admin/application/_collection.html.erb (412.2ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (457.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (18.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (1.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (30.8ms)
+Completed 200 OK in 617ms (Views: 249.5ms | ActiveRecord: 366.7ms)
+
+
+Started GET "/admin/users/new" for ::1 at 2017-05-19 16:52:00 +0530
+  [1m[36mUser Load (421.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#new as HTML
+  Rendering admin/application/new.html.erb within layouts/administrate/application
+  [1m[36mPosition Load (556.5ms)[0m  [1m[34mSELECT "positions".* FROM "positions"[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_form.html.erb (559.7ms)
+  [1m[36mCategory Load (495.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_form.html.erb (499.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (1.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (0.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_form.html.erb (1.3ms)
+  Rendered admin/application/_form.html.erb (1088.8ms)
+  Rendered admin/application/new.html.erb within layouts/administrate/application (1100.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (18.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (1.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (31.4ms)
+Completed 200 OK in 1267ms (Views: 213.4ms | ActiveRecord: 1052.4ms)
+
+
+Started GET "/admin/categories" for ::1 at 2017-05-19 17:13:41 +0530
+Started GET "/admin/categories" for ::1 at 2017-05-19 17:13:45 +0530
+Started GET "/admin/positions" for ::1 at 2017-05-19 17:13:53 +0530
+Started GET "/admin/positions" for ::1 at 2017-05-19 17:13:55 +0530
+Started GET "/admin/" for ::1 at 2017-05-19 17:14:06 +0530
+  [1m[36mUser Load (2392.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::CategoriesController#index as HTML
+  [1m[36mUser Load (2269.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+Processing by Admin::CategoriesController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (32.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (10.9ms)
+  [1m[36mCategory Load (297.8ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  [1m[36mCategory Load (312.6ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  [1m[36mUser Load (328.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::PositionsController#index as HTML
+  [1m[36mUser Load (307.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."category_id" IN (1, 2, 3)[0m
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (1.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (4.8ms)
+  [1m[36mUser Load (313.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."category_id" IN (1, 2, 3)[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (1.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.2ms)
+  Rendered admin/application/_collection.html.erb (793.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (895.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.2ms)
+  Rendered admin/application/_collection.html.erb (820.9ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (900.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (35.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (4.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (64.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.1ms)
+  [1m[36mPosition Load (353.5ms)[0m  [1m[34mSELECT  "positions".* FROM "positions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (86.7ms)
+Completed 200 OK in 1199ms (Views: 592.5ms | ActiveRecord: 605.3ms)
+
+
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (50.1ms)
+Completed 200 OK in 1164ms (Views: 537.4ms | ActiveRecord: 626.3ms)
+
+
+  [1m[36mUser Load (339.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."position_id" IN (1, 2)[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.2ms)
+  Rendered admin/application/_collection.html.erb (756.2ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (814.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (17.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (2.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (42.0ms)
+Completed 200 OK in 982ms (Views: 288.0ms | ActiveRecord: 692.9ms)
+
+
+  [1m[36mUser Load (408.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (4.3ms)
+  [1m[36mUser Load (748.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered admin/application/_collection.html.erb (781.8ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (823.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (18.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (2.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (27.0ms)
+Completed 200 OK in 963ms (Views: 213.6ms | ActiveRecord: 748.4ms)
+
+
+Started GET "/admin/positions" for ::1 at 2017-05-19 17:14:44 +0530
+  [1m[36mUser Load (4710.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::PositionsController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (3.9ms)
+  [1m[36mPosition Load (3412.0ms)[0m  [1m[34mSELECT  "positions".* FROM "positions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  [1m[36mUser Load (3384.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::PositionsController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (3.6ms)
+  [1m[36mUser Load (3273.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."position_id" IN (1, 2)[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.2ms)
+  Rendered admin/application/_collection.html.erb (6740.1ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (6780.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (15.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (2.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (27.1ms)
+Completed 200 OK in 6920ms (Views: 233.9ms | ActiveRecord: 6685.3ms)
+
+
+  [1m[36mPosition Load (2038.9ms)[0m  [1m[34mSELECT  "positions".* FROM "positions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  [1m[36mUser Load (757.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."position_id" IN (1, 2)[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.2ms)
+  Rendered admin/application/_collection.html.erb (2851.1ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (2889.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (22.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (2.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (29.9ms)
+Completed 200 OK in 3051ms (Views: 254.2ms | ActiveRecord: 2796.4ms)
+
+
+Started GET "/admin/categories" for ::1 at 2017-05-19 17:15:20 +0530
+  [1m[36mUser Load (3277.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::CategoriesController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (3.8ms)
+  [1m[36mCategory Load (3719.5ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  [1m[36mUser Load (4708.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."category_id" IN (1, 2, 3)[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (1.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_index.html.erb (0.3ms)
+  Rendered admin/application/_collection.html.erb (8502.7ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (8542.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (15.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (2.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (1.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (25.0ms)
+Completed 200 OK in 8680ms (Views: 251.0ms | ActiveRecord: 8427.8ms)
+
+

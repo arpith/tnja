@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       root to: "users#index"
       resources :positions
       root to: "positions#index"
+      resources :categories
+      root to: "categories#index"
     end
     get 'subscriptions', to: 'subscriptions#index'
 
