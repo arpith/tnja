@@ -1,15 +1,10 @@
-<section id="intro" class="main special">
-  <header class="major">
-    <h2>Directory</h2>
-  </header>
-</section>
-<% @categories.each do |category| %>
+<% @categories.each do |category, users| %>
   <section class="main special">
     <header class="major">
-	  <h2><%= category.name %></h2>
+	  <h3><%= category %></h3>
 	</header>
 	<dl class="alt">
-      <% category.users.each do |user| %>
+      <% users.each do |user| %>
         <dt><%= user.rank %></dt>
         <dd><%= user.full_name %></dd>
 	  <% end %>
