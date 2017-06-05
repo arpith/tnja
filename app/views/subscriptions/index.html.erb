@@ -12,10 +12,22 @@
     data-name="TNJA"
     data-description="Subscription Fee"
     data-image="https://your-awesome-site.com/your_logo.jpg"
-    data-prefill.name="Harshil Mathur"
-    data-prefill.email="support@razorpay.com"
+	data-prefill.name="<%= current_user.full_name %>"
+	data-prefill.email="<%= current_user.email %>"
     data-theme.color="#F37254"
   ></script>
   <input type="hidden" value="Hidden Element" name="hidden">
   </form>
 </section>
+<section class="main special">
+  <header class="major">
+    <h3>Defaulters</h3>
+  </header>
+  <dl class="alt">
+  <% @defaulters.each do |user| %>
+    <dt><%= user.rank %></dt>
+    <dd><%= user.full_name %></dd>
+  <% end %>
+  </dl>
+</section>
+

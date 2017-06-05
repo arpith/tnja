@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       root to: "positions#index"
       resources :categories
       root to: "categories#index"
+      resources :payments
+      root to: "payments#index"
     end
     get 'subscriptions', to: 'subscriptions#index'
 
