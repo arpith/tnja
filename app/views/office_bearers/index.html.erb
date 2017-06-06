@@ -1,0 +1,15 @@
+<% @positions.each do |position, users| %>
+  <section class="main special">
+    <header class="major">
+	  <h2><%= position %></h2>
+	</header>
+  	<ul class="features">
+      <% users.each do |user| %>
+	  <li>
+	    <span class="icon major style1 fa-user"></span>		
+        <h3><%= user.full_name %></h3>
+	  </li>
+	  <% end %>
+    </ul>
+  </section>
+<% end %>
