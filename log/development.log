@@ -19007,3 +19007,394 @@ puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
 puma (3.8.2) lib/puma/server.rb:435:in `process_client'
 puma (3.8.2) lib/puma/server.rb:299:in `block in run'
 puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/admin" for ::1 at 2017-06-06 15:44:43 +0530
+Started GET "/admin" for ::1 at 2017-06-06 15:44:43 +0530
+  [1m[36mUser Load (403.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (402.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#index as HTML
+Processing by Admin::UsersController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (8.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (7.3ms)
+  [1m[36mUser Load (318.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  [1m[36mUser Load (317.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  [1m[36mPosition Load (386.0ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = 1[0m
+  [1m[36mPosition Load (387.6ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = 1[0m
+  [1m[36mCategory Load (340.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = 3[0m
+  [1m[36mCategory Load (340.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = 3[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (4.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (3.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (3.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (3.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.1ms)
+  Rendered admin/application/_collection.html.erb (2235.3ms)
+  Rendered admin/application/_collection.html.erb (2245.3ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (2365.9ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (2384.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (67.3ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (70.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (7.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (26.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (178.8ms)
+Completed 200 OK in 2820ms (Views: 659.6ms | ActiveRecord: 2125.2ms)
+
+
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (217.3ms)
+Completed 200 OK in 2858ms (Views: 705.7ms | ActiveRecord: 2127.3ms)
+
+
+Started GET "/admin/categories" for ::1 at 2017-06-06 15:44:57 +0530
+  [1m[36mUser Load (405.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::CategoriesController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (3.4ms)
+  [1m[36mCategory Load (460.9ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  Rendered admin/application/_collection.html.erb (471.5ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (499.9ms)
+Completed 500 Internal Server Error in 527ms (ActiveRecord: 460.9ms)
+
+
+  
+ActionView::Template::Error (PG::ConnectionBad: PQconsumeInput() server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+: SELECT  "categories".* FROM "categories" LIMIT $1 OFFSET $2):
+    54:   </thead>
+    55: 
+    56:   <tbody>
+    57:     <% resources.each do |resource| %>
+    58:       <tr class="table__row"
+    59:           tabindex="0"
+    60:           <%= %(role=link data-url=#{polymorphic_path([namespace, resource])}) if valid_action? :show -%>
+  
+app/views/admin/application/_collection.html.erb:57:in `_app_views_admin_application__collection_html_erb__980252171675337483_70353750735020'
+app/views/admin/application/index.html.erb:47:in `_app_views_admin_application_index_html_erb___1241678693142688945_70353739089740'
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (5.6ms)
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.5ms)
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (86.1ms)
+  [1m[35m (422.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7951837983298384245);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (489.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddIsAdminToUser (20170606103810)
+  [1m[35m (376.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (509.3ms)[0m  [1m[35mALTER TABLE "users" ADD "is_admin" boolean[0m
+  [1m[35mSQL (415.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170606103810"]]
+  [1m[35m (446.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (857.8ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (829.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (769.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (807.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(7951837983298384245)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (895.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Started GET "/admin/users" for ::1 at 2017-06-06 16:09:42 +0530
+  
+PG::Error (invalid encoding name: unicode):
+  
+activerecord (5.0.2) lib/active_record/connection_adapters/postgresql_adapter.rb:685:in `set_client_encoding'
+activerecord (5.0.2) lib/active_record/connection_adapters/postgresql_adapter.rb:685:in `configure_connection'
+activerecord (5.0.2) lib/active_record/connection_adapters/postgresql_adapter.rb:255:in `reconnect!'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract_adapter.rb:423:in `verify!'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:778:in `block in checkout_and_verify'
+activesupport (5.0.2) lib/active_support/callbacks.rb:126:in `call'
+activesupport (5.0.2) lib/active_support/callbacks.rb:506:in `block (2 levels) in compile'
+activesupport (5.0.2) lib/active_support/callbacks.rb:455:in `call'
+activesupport (5.0.2) lib/active_support/callbacks.rb:101:in `__run_callbacks__'
+activesupport (5.0.2) lib/active_support/callbacks.rb:750:in `_run_checkout_callbacks'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:777:in `checkout_and_verify'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:490:in `checkout'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:647:in `checkout_for_exclusive_access'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:615:in `block (2 levels) in attempt_to_checkout_all_existing_connections'
+/Users/arpith/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/monitor.rb:214:in `mon_synchronize'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:611:in `block in attempt_to_checkout_all_existing_connections'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:259:in `with_a_bias_for'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:609:in `attempt_to_checkout_all_existing_connections'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:595:in `block in with_exclusively_acquired_all_connections'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:671:in `with_new_connections_blocked'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:594:in `with_exclusively_acquired_all_connections'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:448:in `clear_reloadable_connections'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:472:in `clear_reloadable_connections!'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:869:in `each'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:869:in `clear_reloadable_connections!'
+activerecord (5.0.2) lib/active_record/connection_handling.rb:152:in `clear_reloadable_connections!'
+activerecord (5.0.2) lib/active_record/railtie.rb:154:in `block (3 levels) in <class:Railtie>'
+activesupport (5.0.2) lib/active_support/callbacks.rb:396:in `instance_exec'
+activesupport (5.0.2) lib/active_support/callbacks.rb:396:in `block in make_lambda'
+activesupport (5.0.2) lib/active_support/callbacks.rb:169:in `block (2 levels) in halting'
+activesupport (5.0.2) lib/active_support/callbacks.rb:547:in `block (2 levels) in default_terminator'
+activesupport (5.0.2) lib/active_support/callbacks.rb:546:in `catch'
+activesupport (5.0.2) lib/active_support/callbacks.rb:546:in `block in default_terminator'
+activesupport (5.0.2) lib/active_support/callbacks.rb:170:in `block in halting'
+activesupport (5.0.2) lib/active_support/callbacks.rb:454:in `block in call'
+activesupport (5.0.2) lib/active_support/callbacks.rb:454:in `each'
+activesupport (5.0.2) lib/active_support/callbacks.rb:454:in `call'
+activesupport (5.0.2) lib/active_support/callbacks.rb:101:in `__run_callbacks__'
+activesupport (5.0.2) lib/active_support/callbacks.rb:750:in `_run_class_unload_callbacks'
+activesupport (5.0.2) lib/active_support/callbacks.rb:90:in `run_callbacks'
+activesupport (5.0.2) lib/active_support/reloader.rb:119:in `class_unload!'
+railties (5.0.2) lib/rails/application/finisher.rb:166:in `block (2 levels) in <module:Finisher>'
+activesupport (5.0.2) lib/active_support/callbacks.rb:396:in `instance_exec'
+activesupport (5.0.2) lib/active_support/callbacks.rb:396:in `block in make_lambda'
+activesupport (5.0.2) lib/active_support/callbacks.rb:169:in `block (2 levels) in halting'
+activesupport (5.0.2) lib/active_support/callbacks.rb:547:in `block (2 levels) in default_terminator'
+activesupport (5.0.2) lib/active_support/callbacks.rb:546:in `catch'
+activesupport (5.0.2) lib/active_support/callbacks.rb:546:in `block in default_terminator'
+activesupport (5.0.2) lib/active_support/callbacks.rb:170:in `block in halting'
+activesupport (5.0.2) lib/active_support/callbacks.rb:454:in `block in call'
+activesupport (5.0.2) lib/active_support/callbacks.rb:454:in `each'
+activesupport (5.0.2) lib/active_support/callbacks.rb:454:in `call'
+activesupport (5.0.2) lib/active_support/callbacks.rb:101:in `__run_callbacks__'
+activesupport (5.0.2) lib/active_support/callbacks.rb:750:in `_run_run_callbacks'
+activesupport (5.0.2) lib/active_support/callbacks.rb:90:in `run_callbacks'
+activesupport (5.0.2) lib/active_support/execution_wrapper.rb:108:in `run!'
+activesupport (5.0.2) lib/active_support/reloader.rb:113:in `run!'
+activesupport (5.0.2) lib/active_support/execution_wrapper.rb:70:in `block in run!'
+activesupport (5.0.2) lib/active_support/execution_wrapper.rb:67:in `tap'
+activesupport (5.0.2) lib/active_support/execution_wrapper.rb:67:in `run!'
+activesupport (5.0.2) lib/active_support/reloader.rb:59:in `run!'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:10:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (4.0ms)
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (89.7ms)
+Started GET "/admin/users" for ::1 at 2017-06-06 16:17:05 +0530
+  
+PG::Error (invalid encoding name: unicode):
+  
+activerecord (5.0.2) lib/active_record/connection_adapters/postgresql_adapter.rb:685:in `set_client_encoding'
+activerecord (5.0.2) lib/active_record/connection_adapters/postgresql_adapter.rb:685:in `configure_connection'
+activerecord (5.0.2) lib/active_record/connection_adapters/postgresql_adapter.rb:255:in `reconnect!'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract_adapter.rb:423:in `verify!'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:778:in `block in checkout_and_verify'
+activesupport (5.0.2) lib/active_support/callbacks.rb:126:in `call'
+activesupport (5.0.2) lib/active_support/callbacks.rb:506:in `block (2 levels) in compile'
+activesupport (5.0.2) lib/active_support/callbacks.rb:455:in `call'
+activesupport (5.0.2) lib/active_support/callbacks.rb:101:in `__run_callbacks__'
+activesupport (5.0.2) lib/active_support/callbacks.rb:750:in `_run_checkout_callbacks'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:777:in `checkout_and_verify'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:490:in `checkout'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:647:in `checkout_for_exclusive_access'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:615:in `block (2 levels) in attempt_to_checkout_all_existing_connections'
+/Users/arpith/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/monitor.rb:214:in `mon_synchronize'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:611:in `block in attempt_to_checkout_all_existing_connections'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:259:in `with_a_bias_for'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:609:in `attempt_to_checkout_all_existing_connections'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:595:in `block in with_exclusively_acquired_all_connections'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:671:in `with_new_connections_blocked'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:594:in `with_exclusively_acquired_all_connections'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:448:in `clear_reloadable_connections'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:472:in `clear_reloadable_connections!'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:869:in `each'
+activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:869:in `clear_reloadable_connections!'
+activerecord (5.0.2) lib/active_record/connection_handling.rb:152:in `clear_reloadable_connections!'
+activerecord (5.0.2) lib/active_record/railtie.rb:154:in `block (3 levels) in <class:Railtie>'
+activesupport (5.0.2) lib/active_support/callbacks.rb:396:in `instance_exec'
+activesupport (5.0.2) lib/active_support/callbacks.rb:396:in `block in make_lambda'
+activesupport (5.0.2) lib/active_support/callbacks.rb:169:in `block (2 levels) in halting'
+activesupport (5.0.2) lib/active_support/callbacks.rb:547:in `block (2 levels) in default_terminator'
+activesupport (5.0.2) lib/active_support/callbacks.rb:546:in `catch'
+activesupport (5.0.2) lib/active_support/callbacks.rb:546:in `block in default_terminator'
+activesupport (5.0.2) lib/active_support/callbacks.rb:170:in `block in halting'
+activesupport (5.0.2) lib/active_support/callbacks.rb:454:in `block in call'
+activesupport (5.0.2) lib/active_support/callbacks.rb:454:in `each'
+activesupport (5.0.2) lib/active_support/callbacks.rb:454:in `call'
+activesupport (5.0.2) lib/active_support/callbacks.rb:101:in `__run_callbacks__'
+activesupport (5.0.2) lib/active_support/callbacks.rb:750:in `_run_class_unload_callbacks'
+activesupport (5.0.2) lib/active_support/callbacks.rb:90:in `run_callbacks'
+activesupport (5.0.2) lib/active_support/reloader.rb:119:in `class_unload!'
+railties (5.0.2) lib/rails/application/finisher.rb:166:in `block (2 levels) in <module:Finisher>'
+activesupport (5.0.2) lib/active_support/callbacks.rb:396:in `instance_exec'
+activesupport (5.0.2) lib/active_support/callbacks.rb:396:in `block in make_lambda'
+activesupport (5.0.2) lib/active_support/callbacks.rb:169:in `block (2 levels) in halting'
+activesupport (5.0.2) lib/active_support/callbacks.rb:547:in `block (2 levels) in default_terminator'
+activesupport (5.0.2) lib/active_support/callbacks.rb:546:in `catch'
+activesupport (5.0.2) lib/active_support/callbacks.rb:546:in `block in default_terminator'
+activesupport (5.0.2) lib/active_support/callbacks.rb:170:in `block in halting'
+activesupport (5.0.2) lib/active_support/callbacks.rb:454:in `block in call'
+activesupport (5.0.2) lib/active_support/callbacks.rb:454:in `each'
+activesupport (5.0.2) lib/active_support/callbacks.rb:454:in `call'
+activesupport (5.0.2) lib/active_support/callbacks.rb:101:in `__run_callbacks__'
+activesupport (5.0.2) lib/active_support/callbacks.rb:750:in `_run_run_callbacks'
+activesupport (5.0.2) lib/active_support/callbacks.rb:90:in `run_callbacks'
+activesupport (5.0.2) lib/active_support/execution_wrapper.rb:108:in `run!'
+activesupport (5.0.2) lib/active_support/reloader.rb:113:in `run!'
+activesupport (5.0.2) lib/active_support/execution_wrapper.rb:70:in `block in run!'
+activesupport (5.0.2) lib/active_support/execution_wrapper.rb:67:in `tap'
+activesupport (5.0.2) lib/active_support/execution_wrapper.rb:67:in `run!'
+activesupport (5.0.2) lib/active_support/reloader.rb:59:in `run!'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:10:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (5.8ms)
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.9ms)
+  Rendering /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (79.3ms)
+Started GET "/admin/users" for ::1 at 2017-06-06 16:20:48 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (409.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mUser Load (508.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#index as HTML
+  Rendering admin/application/index.html.erb within layouts/administrate/application
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_search.html.erb (7.2ms)
+  [1m[36mUser Load (500.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  [1m[36mPosition Load (458.0ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = 1[0m
+  [1m[36mCategory Load (510.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = 3[0m
+  [1m[36mPayment Load (511.6ms)[0m  [1m[34mSELECT "payments".* FROM "payments" WHERE "payments"."user_id" = 1[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_index.html.erb (0.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (3.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_index.html.erb (2.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_index.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/boolean/_index.html.erb (0.8ms)
+  Rendered admin/application/_collection.html.erb (4356.8ms)
+  Rendered admin/application/index.html.erb within layouts/administrate/application (4402.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (17.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (37.4ms)
+Completed 200 OK in 4557ms (Views: 309.3ms | ActiveRecord: 4245.1ms)
+
+
+Started GET "/admin/users/1/edit" for ::1 at 2017-06-06 16:21:14 +0530
+  [1m[36mUser Load (508.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (511.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/application/edit.html.erb within layouts/administrate/application
+  [1m[36mPosition Load (409.5ms)[0m  [1m[34mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (511.6ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mPosition Load (397.8ms)[0m  [1m[34mSELECT "positions".* FROM "positions"[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_form.html.erb (413.7ms)
+  [1m[36mCategory Load (490.8ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_form.html.erb (493.8ms)
+  [1m[36mPayment Load (497.6ms)[0m  [1m[34mSELECT "payments".* FROM "payments"[0m
+  [1m[36mPayment Load (409.0ms)[0m  [1m[34mSELECT "payments".* FROM "payments" WHERE "payments"."user_id" = $1[0m  [["user_id", 1]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_form.html.erb (1424.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (1.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_form.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_form.html.erb (1.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/boolean/_form.html.erb (6.3ms)
+  Rendered admin/application/_form.html.erb (4189.2ms)
+  Rendered admin/application/edit.html.erb within layouts/administrate/application (4199.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (14.8ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (3.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (22.2ms)
+Completed 200 OK in 5771ms (Views: 1623.0ms | ActiveRecord: 3729.9ms)
+
+
+Started PATCH "/admin/users/1" for ::1 at 2017-06-06 16:21:28 +0530
+  [1m[36mUser Load (489.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"rIqdsB2jucEIBCqY7p6qAZNavVxoCm3119imx1YrNqRKlc1dfWYoKxMEBdF2R7oS2DnAZ/YKglHkTCM5WZ9Yjw==", "user"=>{"position_id"=>"1", "category_id"=>"3", "payment_ids"=>[""], "email"=>"arpith@feedreader.co", "full_name"=>"Arpith Siromoney", "rank"=>"1", "is_admin"=>"1"}, "commit"=>"Update User", "id"=>"1"}
+  [1m[36mUser Load (512.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (425.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPayment Load (406.5ms)[0m  [1m[34mSELECT "payments".* FROM "payments" WHERE 1=0[0m
+  [1m[36mPayment Load (444.2ms)[0m  [1m[34mSELECT "payments".* FROM "payments" WHERE "payments"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[36mPosition Load (472.2ms)[0m  [1m[34mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (458.1ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (456.7ms)[0m  [1m[33mUPDATE "users" SET "is_admin" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["is_admin", true], ["updated_at", 2017-06-06 10:51:34 UTC], ["id", 1]]
+  [1m[35m (509.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/admin/users/1
+Completed 302 Found in 5629ms (ActiveRecord: 5091.2ms)
+
+
+Started GET "/admin/users/1" for ::1 at 2017-06-06 16:21:35 +0530
+  [1m[36mUser Load (509.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by Admin::UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (410.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/application/show.html.erb within layouts/administrate/application
+  [1m[36mPosition Load (406.0ms)[0m  [1m[34mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (430.4ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_show.html.erb (1.9ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/belongs_to/_show.html.erb (0.9ms)
+  [1m[35m (461.4ms)[0m  [1m[34mSELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "payments" WHERE "payments"."user_id" = $1 LIMIT $2 OFFSET $3) subquery_for_count[0m  [["user_id", 1], ["LIMIT", 5], ["OFFSET", 0]]
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/has_many/_show.html.erb (469.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_show.html.erb (0.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_show.html.erb (0.5ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_show.html.erb (0.6ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_show.html.erb (0.4ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/date_time/_show.html.erb (0.2ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/string/_show.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/number/_show.html.erb (0.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/fields/boolean/_show.html.erb (0.5ms)
+  Rendered admin/application/show.html.erb within layouts/administrate/application (2262.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_stylesheet.html.erb (13.7ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_sidebar.html.erb (5.1ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_flashes.html.erb (1.0ms)
+  Rendered /Users/arpith/.rvm/gems/ruby-2.3.1/gems/administrate-0.6.0/app/views/administrate/application/_javascript.html.erb (21.6ms)
+Completed 200 OK in 3730ms (Views: 1101.1ms | ActiveRecord: 2217.0ms)
+
+
