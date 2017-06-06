@@ -3,15 +3,15 @@
     <h2>Subscription</h2>
   </header>
   <form action="/purchase" method="POST">
-  <!-- Note that the amount is in paise = 50 INR -->
+  <!-- Note that the amount is in paise = 1000 INR -->
   <script
     src="https://checkout.razorpay.com/v1/checkout.js"
-    data-key="<YOUR_KEY_ID>"
+	data-key="<%= ENV['RAZORPAY_KEY_ID'] %>"
     data-amount="100000"
     data-buttontext="Pay with Razorpay"
     data-name="TNJA"
     data-description="Subscription Fee"
-    data-image="https://your-awesome-site.com/your_logo.jpg"
+    data-image="/assets/logo.png"
 	data-prefill.name="<%= current_user.full_name %>"
 	data-prefill.email="<%= current_user.email %>"
     data-theme.color="#F37254"
@@ -21,7 +21,7 @@
 </section>
 <section class="main special">
   <header class="major">
-    <h3>Defaulters</h3>
+    <h2>Defaulters</h2>
   </header>
   <dl class="alt">
   <% @defaulters.each do |user| %>
